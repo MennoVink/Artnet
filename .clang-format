@@ -1,0 +1,262 @@
+---
+#Dont specify a language, that makes the options the default for all languages, which is
+#what we need to support objective-c formatting
+#Language:        Cpp
+# Based on clang-format version 9.0.0
+AccessModifierOffset: -4
+AlignAfterOpenBracket: Align
+#TODO: We want consecutive assignments in enums to be aligned, but not for normal variables. We can only either align all of them
+#or none. For now we're choosing to align neither because being able to read enum values is less important than reading variables.
+AlignConsecutiveAssignments: false
+AlignConsecutiveDeclarations: false
+AlignConsecutiveMacros: false
+AlignEscapedNewlines: Right
+AlignOperands: true
+#Aligning over empty lines sounds kinda nice, but in practice it's undesirable. First of all some functions are
+#too long and push comments out of view, this will then be adopted for all other functions in a class header. Also,
+#it will align member variable comments at the same column as short function descriptions. Finally a last issue is
+#that it's unstable when some functions have no comments. It'll break off the global alignment (as the line isn't empty)
+#and thus it'll fall back to the block based alignment anyway. So in order to keep things in-view and steady we keep
+#using the block based alignment.
+AlignTrailingComments:
+  Kind: Always
+  OverEmptyLines: 0
+AllowAllArgumentsOnNextLine: false
+#No effect due to ConstructorInitializerAllOnOneLineOrOnePerLine being disabled
+#AllowAllConstructorInitializersOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Empty
+AllowShortLoopsOnASingleLine: false
+#Deprecated
+#AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
+AlwaysBreakTemplateDeclarations: Yes
+BinPackArguments: true
+#Only supported in JavaScript when BinPackArguments is disabled
+#InsertTrailingCommas: None
+BinPackParameters: true
+#Braces match Allman except for lambdas
+BraceWrapping:
+  AfterCaseLabel: true
+  AfterClass: true
+#Mutliple choice not available in clang-format 9.0.0
+#  AfterControlStatement: Always
+  AfterControlStatement: true
+  AfterEnum: true
+  AfterFunction: true
+  AfterNamespace: true
+  AfterObjCDeclaration: true
+  AfterStruct: true
+  AfterUnion: true
+  AfterExternBlock: true
+  BeforeCatch: true
+  BeforeElse: true
+  BeforeLambdaBody: false
+  BeforeWhile: false
+#Not supported in clang-format 9.0.0
+#  BeforeLambdaBody: false
+  IndentBraces: false
+  SplitEmptyFunction: true
+  SplitEmptyRecord: true
+  SplitEmptyNamespace: true
+#Java specific option
+#BreakAfterJavaFieldAnnotations: true
+BreakBeforeBinaryOperators: None
+BreakBeforeBraces: Custom
+BreakBeforeTernaryOperators: false
+BreakConstructorInitializers: AfterColon
+BreakInheritanceList: AfterColon
+BreakStringLiterals: false
+#Unknown options according to clang.llvm.org
+#BreakBeforeInheritanceComma: false
+#BreakConstructorInitializersBeforeComma: false
+ColumnLimit: 0
+#CommentPragmas:  '^ IWYU pragma:'
+CompactNamespaces: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: false
+ConstructorInitializerIndentWidth: 4
+ContinuationIndentWidth: 4
+Cpp11BracedListStyle: false
+DerivePointerAlignment: false
+DisableFormat: false
+#Experimental setting that may not be supported in the future
+ExperimentalAutoDetectBinPacking: false
+FixNamespaceComments: true
+ForEachMacros:
+  - foreach
+IncludeBlocks: Preserve
+IndentCaseLabels: false
+IndentPPDirectives: AfterHash
+IndentWidth: 4
+IndentWrappedFunctionNames: true
+#JavaImportGroups: []
+JavaScriptQuotes: Double
+JavaScriptWrapImports: false
+#Must be true due to newline in namespace scope open
+KeepEmptyLinesAtTheStartOfBlocks: true
+MacroBlockBegin: ''
+MacroBlockEnd: ''
+MaxEmptyLinesToKeep: 2
+NamespaceIndentation: None
+#NamespaceMacros
+ObjCBinPackProtocolList: Always
+ObjCBlockIndentWidth : 4
+ObjCSpaceAfterProperty: false
+ObjCSpaceBeforeProtocolList: false
+PenaltyBreakAssignment: 0
+PenaltyBreakBeforeFirstCallParameter: 0
+PenaltyBreakComment: 0
+PenaltyBreakFirstLessLess: 0
+PenaltyBreakString: 0
+PenaltyBreakTemplateDeclaration: 0
+PenaltyExcessCharacter: 0
+PenaltyReturnTypeOnItsOwnLine: 0
+PointerAlignment: Left
+#RawStringFormats
+ReflowComments: false
+SortIncludes: false
+SortUsingDeclarations: false
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpaceBeforeParens: Never
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 1
+SpacesInAngles: true
+SpacesInCStyleCastParentheses: false
+SpacesInContainerLiterals: true
+#TODO: Would be nice if we could use spaces for functions but not for explicit math operator ordering.
+SpacesInParentheses: true
+SpacesInSquareBrackets: true
+Standard: Cpp11
+TabWidth: 4
+#We'd like to use tabs for initializer lists, but enabling tabs for continuation also
+#causes multiple lines of function (including constructor) arguments to be indented using tabs.
+#This is undesirable as that actually happens quite a lot (eg when initializing a 4x4 matrix)
+UseTab: ForIndentation
+
+#10.0.0 options
+#Deprecated in favor of LineEnding
+#DeriveLineEnding: true
+#Perhaps add hpp template implementation files?
+#IncludeIsMainRegex: 
+IndentGotoLabels: false
+SpaceBeforeSquareBrackets: false
+SpaceInEmptyBlock: false
+SpacesInConditionalStatement: true
+#Deprecated
+#UseCRLF: 
+
+#11.0.0 options
+AlignConsecutiveBitFields: None
+AllowShortEnumsOnASingleLine: false
+IndentCaseBlocks: false
+IndentExternBlock: AfterExternBlock
+#Javascript only option
+#InsertTrailingCommas: None
+ObjCBreakBeforeNestedBlockParam: false
+#WhitespaceSensitiveMacros: []
+
+#12.0.0 options
+#AttributeMacros: []
+BitFieldColonSpacing: Both
+BreakBeforeConceptDeclarations: Always
+PenaltyIndentedWhitespace: 0
+#Java specific
+#SortJavaStaticImport: 
+#Use PointerAlignment
+SpaceAroundPointerQualifiers: Default
+SpaceBeforeCaseColon: false
+#StatementAttributeLikeMacros: []
+
+#13.0.0 options
+#For numbers right aligning is nice, but for the rest it's not, especially because it removes the spaces inside the
+#structure's initializer list.
+AlignArrayOfStructures: None
+EmptyLineAfterAccessModifier: Never
+EmptyLineBeforeAccessModifier: Always
+#IfMacros: []
+IndentAccessModifiers: false
+LambdaBodyIndentation: Signature
+#Use IndentWidth
+PPIndentWidth: -1
+#Use PointerAlignment
+ReferenceAlignment: Pointer
+ShortNamespaceLines: 1
+SpacesInLineCommentPrefix:
+  Minimum: 0
+  Maximum: 0
+
+#14.0.0 options
+#There's no Keep option for this, but not mentioning it seems to disable this formatting. We want to keep
+#what the developer writes because then logical groupings may be used. ie width and height could be initialized
+#on one line and texelFormat on another.
+#PackConstructorInitializers: Never
+PenaltyBreakOpenParenthesis: 0
+QualifierAlignment: Leave
+#TODO: Doesn't work in 16.0.0, unknown key
+#QualifierOrder: [ 'static', 'const', 'constexpr', 'volatile', 'inline', 'friend', 'restrict', 'type' ]
+#Will be renamed / expanded so not using it, would be nice to have it enabled.
+RemoveBracesLLVM: false
+SeparateDefinitionBlocks: Leave
+#Ignored as SpaceBeforeParens is Never
+#SpaceBeforeParensOptions: 
+
+#15.0.0 options
+IndentRequiresClause: false
+InsertBraces: false
+RequiresClausePosition: OwnLine
+
+#16.0.0 options
+BreakAfterAttributes: Never
+#BreakArrays: #Option only for json formatting
+BreakBeforeInlineASMColon: Always
+InsertNewlineAtEOF: false
+#Cant imagine this is ever used, so leave as is so that first-time usage can decide.
+IntegerLiteralSeparator:
+  Binary: 0
+  Decimal: 0
+  Hex: 0
+#Windows uses CRLF, we store LF in git. It's up to the git client to check out with the correct line ending.
+LineEnding: DeriveCRLF
+RemoveSemicolon: true
+RequiresExpressionIndentation: OuterScope
+
+#17.0.0 options
+#Dont set so that ContinuationIndentWidth is used.
+#BracedInitializerIndentWidth: 
+#Compilers mistreating includes require end of lines in the files being included.
+KeepEmptyLinesAtEOF: true
+#Macros: []
+SpaceBeforeJsonColon: false
+#VerilogBreakBetweenInstancePorts: 
+
+#18.0.0 options
+AllowBreakBeforeNoexceptSpecifier: Never
+AllowShortCompoundRequirementOnASingleLine: true
+BreakAdjacentStringLiterals: false
+#ObjCPropertyAttributeOrder: []
+PenaltyBreakScopeResolution: 0
+SkipMacroDefinitionBody: true
+
+#19.0.0 options
+##AlignConsecutiveTableGenBreakingDAGArgColons:
+##AlignConsecutiveTableGenCondOperatorColons:
+##AlignConsecutiveTableGenDefinitionColons:
+#AllowShortCaseExpressionOnASingleLine: false
+#BreakAfterReturnType: Automatic
+#BreakFunctionDefinitionParameters: false
+#BreakTemplateDeclarations: Yes
+#MainIncludeChar: Quote
+##TableGenBreakInsideDAGArg:
+##TableGenBreakingDAGArgOperators:

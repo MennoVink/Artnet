@@ -12,41 +12,41 @@ This example may be copied under the terms of the MIT license, see the LICENSE f
 Artnet artnet;
 
 // Change ip and mac address for your setup
-byte ip[] = {10, 0, 1, 199};
-byte broadcast[] = {10, 0, 1, 255};
-byte mac[] = {0x04, 0xE9, 0xE5, 0x00, 0x69, 0xEC};
+byte ip[] = { 10, 0, 1, 199 };
+byte broadcast[] = { 10, 0, 1, 255 };
+byte mac[] = { 0x04, 0xE9, 0xE5, 0x00, 0x69, 0xEC };
 
 void setup()
 {
-  Serial.begin(115200);
-  artnet.begin(mac, ip);
-  artnet.setBroadcast(broadcast);
+	Serial.begin( 115200 );
+	artnet.begin( mac, ip );
+	artnet.setBroadcast( broadcast );
 }
 
 void loop()
 {
-  uint16_t r = artnet.read();
-  if(r == ART_POLL)
-  {
-    Serial.println("POLL");
-  }
-  if (r == ART_DMX)
-  {
-    // print out our data
-    Serial.print("universe number = ");
-    Serial.print(artnet.getUniverse());
-    Serial.print("\tdata length = ");
-    Serial.print(artnet.getLength());
-    Serial.print("\tsequence n0. = ");
-    Serial.println(artnet.getSequence());
-    Serial.print("DMX data: ");
-    for (int i = 0 ; i < artnet.getLength() ; i++)
-    {
-      Serial.print(artnet.getDmxFrame()[i]);
-      Serial.print("  ");
-    }
-    Serial.println();
-    Serial.println();
-  }
+	uint16_t r = artnet.read();
+	if( r == ART_POLL )
+	{
+		Serial.println( "POLL" );
+	}
+	if( r == ART_DMX )
+	{
+		// print out our data
+		Serial.print( "universe number = " );
+		Serial.print( artnet.getUniverse() );
+		Serial.print( "\tdata length = " );
+		Serial.print( artnet.getLength() );
+		Serial.print( "\tsequence n0. = " );
+		Serial.println( artnet.getSequence() );
+		Serial.print( "DMX data: " );
+		for( int i = 0; i < artnet.getLength(); i++ )
+		{
+			Serial.print( artnet.getDmxFrame()[ i ] );
+			Serial.print( "  " );
+		}
+		Serial.println();
+		Serial.println();
+	}
 }
 
